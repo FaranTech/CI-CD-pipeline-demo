@@ -1,0 +1,41 @@
+.about {
+  padding: 56px 0 72px;
+}
+
+.about-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--accent-pass);
+  margin: 0 0 12px;
+}
+
+.about-lead {
+  color: var(--text-muted);
+  max-width: 56ch;
+  font-size: 1.02rem;
+  margin-bottom: 40px;
+}
+
+.about-block {
+  max-width: 62ch;
+  padding: 24px 0;
+  border-top: 1px solid var(--border);
+}
+
+.about-block h2 {
+  font-size: 1.1rem;
+}
+
+.about-block p {
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.about-block code {
+  font-family: var(--font-mono);
+  background: var(--surface-2);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.88em;
+  color: var(--text);
+}

@@ -1,0 +1,56 @@
+# =========================================================
+# MANUAL CI/CD PIPELINE
+# Yahan har step hum khud likh rahe hain — koi ready-made
+# "deploy action" use nahi kar rahe. Deploy bhi plain git
+# commands se manually kar rahe hain.
+# =========================================================
+
+name: Manual CI-CD Pipeline
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build-test-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1) Repo ka code laao
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2) Node.js manually setup karo
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # 3) Dependencies install (manual command)
+      - name: Install dependencies
+        run: npm install
+
+      # 4) Lint check (manual command)
+      - name: Run Lint
+        run: npm run lint
+
+      # 5) Tests chalao (manual command)
+      - name: Run Tests
+        run: npm test
+
+      # 6) Build banao (manual command)
+      - name: Build project
+        run: npm run build
+
+      # 7) MANUAL DEPLOY — khud git commands likh kar
+      #    gh-pages branch pe build push kar rahe hain.
+      #    Koi ready-made deploy action use nahi kiya.
+      - name: Manual deploy to GitHub Pages
+        run: |
+          cd dist
+          git init
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Manual deploy: ${{ github.sha }}"
+          git push --force "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" HEAD:gh-pages

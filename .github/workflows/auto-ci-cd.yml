@@ -1,0 +1,59 @@
+# =========================================================
+# NON-MANUAL (AUTOMATED) CI/CD PIPELINE
+# Yahan hum ready-made "actions" use kar rahe hain jo
+# GitHub Marketplace pe already maujood hain — including
+# deploy step. Hume khud commands likhne ki zaroorat nahi.
+# =========================================================
+
+name: Automated CI-CD Pipeline
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'          # ready-made caching, koi manual setup nahi
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run Lint
+        run: npm run lint
+
+      - name: Run Tests
+        run: npm test
+
+      - name: Build project
+        run: npm run build
+
+      # Build output ko agle job ke liye save kar rahe hain
+      - name: Upload build artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build-and-test
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      # Ready-made action — deploy ke liye ek line bhi
+      # manual git command nahi likhi.
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

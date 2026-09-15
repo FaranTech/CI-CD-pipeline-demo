@@ -1,0 +1,83 @@
+.status {
+  padding: 56px 0 64px;
+}
+
+.status-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--accent-run);
+  margin: 0 0 12px;
+}
+
+.status-sub {
+  color: var(--text-muted);
+  max-width: 54ch;
+  margin-bottom: 32px;
+}
+
+.stage-list {
+  list-style: none;
+  margin: 0 0 20px;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.stage-row + .stage-row {
+  border-top: 1px solid var(--border);
+}
+
+.stage-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--surface);
+  border: none;
+  padding: 16px 20px;
+  color: var(--text);
+  font-size: 0.95rem;
+  text-align: left;
+  transition: background 0.15s ease;
+}
+
+.stage-btn:hover {
+  background: var(--surface-2);
+}
+
+.badge {
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+}
+
+.badge-pending {
+  color: var(--text-muted);
+  border-color: var(--border);
+}
+
+.badge-running {
+  color: var(--accent-run);
+  border-color: color-mix(in srgb, var(--accent-run) 40%, transparent);
+  background: color-mix(in srgb, var(--accent-run) 12%, transparent);
+}
+
+.badge-passed {
+  color: var(--accent-pass);
+  border-color: color-mix(in srgb, var(--accent-pass) 40%, transparent);
+  background: color-mix(in srgb, var(--accent-pass) 12%, transparent);
+}
+
+.badge-failed {
+  color: var(--accent-fail);
+  border-color: color-mix(in srgb, var(--accent-fail) 40%, transparent);
+  background: color-mix(in srgb, var(--accent-fail) 12%, transparent);
+}
+
+.reset-btn {
+  font-size: 0.85rem;
+  padding: 8px 16px;
+}
